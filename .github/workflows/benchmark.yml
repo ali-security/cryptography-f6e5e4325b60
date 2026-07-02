@@ -2,9 +2,9 @@ name: Benchmark
 on:
   pull_request:
     paths:
-      - ".github/workflows/benchmark.yml"
-      - "src/**"
-      - "tests/**"
+      - .github/workflows/benchmark.yml
+      - src/**
+      - tests/**
   workflow_dispatch:
     inputs:
       base_commit:
@@ -19,21 +19,21 @@ concurrency:
 
 jobs:
   benchmark:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
         timeout-minutes: 3
         with:
           persist-credentials: false
-          path: "cryptography-pr"
+          path: cryptography-pr
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
         timeout-minutes: 3
         with:
           persist-credentials: false
-          repository: "pyca/cryptography"
-          path: "cryptography-base"
-          ref: "${{ github.event.inputs.base_commit || github.base_ref }}"
+          repository: pyca/cryptography
+          path: cryptography-base
+          ref: ${{ github.event.inputs.base_commit || github.base_ref }}
       - name: Clone test vectors
         timeout-minutes: 2
         uses: ./cryptography-base/.github/actions/fetch-vectors
@@ -42,7 +42,7 @@ jobs:
         id: setup-python
         uses: actions/setup-python@e797f83bcb11b83ae66e0230d6156d7c80228e7c # v6.0.0
         with:
-          python-version: "3.11"
+          python-version: '3.11'
 
       - name: Create virtualenv (base)
         run: |

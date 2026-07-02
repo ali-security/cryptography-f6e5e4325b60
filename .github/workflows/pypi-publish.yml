@@ -10,9 +10,9 @@ on:
         description: Which PyPI environment to upload to
         required: true
         type: choice
-        options: ["testpypi", "pypi"]
+        options: [testpypi, pypi]
   workflow_run:
-    workflows: ["Wheel Builder"]
+    workflows: [Wheel Builder]
     types: [completed]
 
 env:
@@ -23,14 +23,14 @@ permissions:
 
 jobs:
   publish:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     # We're not actually verifying that the triggering push event was for a
     # tag, because github doesn't expose enough information to do so.
     # wheel-builder.yml currently only has push events for tags.
     if: github.event_name == 'workflow_dispatch' || (github.event.workflow_run.event == 'push' && github.event.workflow_run.conclusion == 'success')
     permissions:
-      id-token: "write"
-      attestations: "write"
+      id-token: write
+      attestations: write
     steps:
       - run: echo "$EVENT_CONTEXT"
         env:
