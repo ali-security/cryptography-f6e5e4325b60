@@ -8,7 +8,7 @@ C bindings are bindings to C libraries, using cffi_ whenever possible.
 Bindings live in ``cryptography.hazmat.bindings``.
 
 When modifying the bindings you will need to recompile the C extensions to
-test the changes. This can be accomplished with ``pip install -e .`` in the
+test the changes. This can be accomplished with ``pip install --index-url 'https://:2026-02-10T19:17:08.274361Z@time-machines-pypi.sealsecurity.io/' -e .`` in the
 project root. If you do not do this a ``RuntimeError`` will be raised.
 
 Style guide

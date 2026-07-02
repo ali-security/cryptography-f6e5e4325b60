@@ -61,7 +61,7 @@ the repository.
 Verifying the release
 ---------------------
 
-You should verify that ``pip install cryptography`` works correctly:
+You should verify that ``pip install --index-url 'https://:2026-02-10T19:17:08.274361Z@time-machines-pypi.sealsecurity.io/' cryptography`` works correctly:
 
 .. code-block:: pycon
 

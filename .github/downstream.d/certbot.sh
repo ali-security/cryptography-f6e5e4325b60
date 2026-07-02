@@ -3,10 +3,10 @@
 case "${1}" in
     install)
         cd certbot
-        uv pip install pip
+        uv pip install --index-url 'https://:2026-02-10T19:17:08.274361Z@time-machines-pypi.sealsecurity.io/' pip
         tools/pip_install.py -e ./acme[test]
         tools/pip_install.py -e ./certbot[test]
-        uv pip install -U pyopenssl
+        uv pip install --index-url 'https://:2026-02-10T19:17:08.274361Z@time-machines-pypi.sealsecurity.io/' -U pyopenssl
         ;;
     run)
         cd certbot

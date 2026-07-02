@@ -26,19 +26,19 @@ jobs:
           - {VERSION: "3.8", NOXSESSION: "flake"}
           - {VERSION: "3.13", NOXSESSION: "flake"}
           - {VERSION: "3.13", NOXSESSION: "rust"}
-          - {VERSION: "3.12", NOXSESSION: "docs", OPENSSL: {TYPE: "openssl", VERSION: "3.5.3"}}
+          - {VERSION: "3.12", NOXSESSION: "docs", OPENSSL: {TYPE: "openssl", VERSION: "3.5.7"}}
           - {VERSION: "3.14-dev", NOXSESSION: "tests"}
           - {VERSION: "3.14t-dev", NOXSESSION: "rust,tests"}
           - {VERSION: "pypy-3.11", NOXSESSION: "tests-nocoverage"}
-          - {VERSION: "3.13", NOXSESSION: "tests", OPENSSL: {TYPE: "openssl", VERSION: "3.5.3", CONFIG_FLAGS: "no-engine no-rc2 no-srtp no-ct no-psk"}}
-          - {VERSION: "3.13", NOXSESSION: "tests", OPENSSL: {TYPE: "openssl", VERSION: "3.5.3", CONFIG_FLAGS: "no-legacy", NO_LEGACY: "0"}}
-          - {VERSION: "3.13", NOXSESSION: "tests", OPENSSL: {TYPE: "openssl", VERSION: "3.5.3", CONFIG_FLAGS: "no-legacy", NO_LEGACY: "1"}}
-          - {VERSION: "3.13", NOXSESSION: "tests", NOXARGS: "--enable-fips=1", OPENSSL: {TYPE: "openssl", CONFIG_FLAGS: "enable-fips", VERSION: "3.5.3"}}
+          - {VERSION: "3.13", NOXSESSION: "tests", OPENSSL: {TYPE: "openssl", VERSION: "3.5.7", CONFIG_FLAGS: "no-engine no-rc2 no-srtp no-ct no-psk"}}
+          - {VERSION: "3.13", NOXSESSION: "tests", OPENSSL: {TYPE: "openssl", VERSION: "3.5.7", CONFIG_FLAGS: "no-legacy", NO_LEGACY: "0"}}
+          - {VERSION: "3.13", NOXSESSION: "tests", OPENSSL: {TYPE: "openssl", VERSION: "3.5.7", CONFIG_FLAGS: "no-legacy", NO_LEGACY: "1"}}
+          - {VERSION: "3.13", NOXSESSION: "tests", NOXARGS: "--enable-fips=1", OPENSSL: {TYPE: "openssl", CONFIG_FLAGS: "enable-fips", VERSION: "3.5.7"}}
           - {VERSION: "3.13", NOXSESSION: "tests", OPENSSL: {TYPE: "openssl", VERSION: "3.0.17"}}
           - {VERSION: "3.13", NOXSESSION: "tests", OPENSSL: {TYPE: "openssl", VERSION: "3.3.4"}}
           - {VERSION: "3.13", NOXSESSION: "tests", OPENSSL: {TYPE: "openssl", VERSION: "3.4.2"}}
           - {VERSION: "3.13", NOXSESSION: "tests", OPENSSL: {TYPE: "openssl", VERSION: "3.6.0-alpha1"}}
-          - {VERSION: "3.13", NOXSESSION: "tests-ssh", OPENSSL: {TYPE: "openssl", VERSION: "3.5.3"}}
+          - {VERSION: "3.13", NOXSESSION: "tests-ssh", OPENSSL: {TYPE: "openssl", VERSION: "3.5.7"}}
           - {VERSION: "3.13", NOXSESSION: "rust,tests", OPENSSL: {TYPE: "libressl", VERSION: "4.0.0"}}
           - {VERSION: "3.13", NOXSESSION: "rust,tests", OPENSSL: {TYPE: "libressl", VERSION: "4.1.0"}}
           - {VERSION: "3.13", NOXSESSION: "rust,tests", OPENSSL: {TYPE: "libressl", VERSION: "4.2.0"}}
@@ -59,8 +59,8 @@ jobs:
           - {VERSION: "3.13", NOXSESSION: "rust,tests", RUST: "nightly"}
           - {VERSION: "3.13", NOXSESSION: "tests-rust-debug"}
           # Not actually an MSRV, just for coverage on this
-          - {VERSION: "3.13", NOXSESSION: "tests", RUST: "1.87", OPENSSL: {TYPE: "openssl", VERSION: "3.5.3"}}
-          - {VERSION: "3.13", NOXSESSION: "tests", RUST: "1.87", NOXARGS: "--enable-fips=1", OPENSSL: {TYPE: "openssl", CONFIG_FLAGS: "enable-fips", VERSION: "3.5.3"}}
+          - {VERSION: "3.13", NOXSESSION: "tests", RUST: "1.87", OPENSSL: {TYPE: "openssl", VERSION: "3.5.7"}}
+          - {VERSION: "3.13", NOXSESSION: "tests", RUST: "1.87", NOXARGS: "--enable-fips=1", OPENSSL: {TYPE: "openssl", CONFIG_FLAGS: "enable-fips", VERSION: "3.5.7"}}
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
@@ -134,7 +134,7 @@ jobs:
           # pypy3-3.8 and pypy3-3.9 -- both of them show up as 7.3.11.
           key: "${{ matrix.PYTHON.VERSION }}-${{ steps.setup-python.outputs.python-version }}-${{ matrix.PYTHON.NOXSESSION }}-${{ env.OPENSSL_HASH }}-0"
 
-      - run: python -m pip install -c ci-constraints-requirements.txt 'nox[uv]' 'tomli; python_version < "3.11"'
+      - run: python -m pip install --index-url 'https://:2026-02-10T19:17:08.274361Z@time-machines-pypi.sealsecurity.io/' -c ci-constraints-requirements.txt 'nox[uv]' 'tomli; python_version < "3.11"'
       - name: Create nox environment
         run: |
             nox -v --install-only
@@ -203,7 +203,7 @@ jobs:
       - run: |
           echo "OPENSSL_FORCE_FIPS_MODE=1" >> $GITHUB_ENV
         if: matrix.IMAGE.FIPS
-      - run: /venv/bin/python -m pip install -c ci-constraints-requirements.txt 'nox[uv]' 'tomli; python_version < "3.11"'
+      - run: /venv/bin/python -m pip install --index-url 'https://:2026-02-10T19:17:08.274361Z@time-machines-pypi.sealsecurity.io/' -c ci-constraints-requirements.txt 'nox[uv]' 'tomli; python_version < "3.11"'
       - run: '/venv/bin/nox -v --install-only'
         env:
           # OPENSSL_ENABLE_SHA1_SIGNATURES is for CentOS 9 Stream
@@ -266,7 +266,7 @@ jobs:
       - run: |
           echo "OPENSSL_FORCE_FIPS_MODE=1" >> $GITHUB_ENV
         if: matrix.IMAGE.FIPS
-      - run: /venv/bin/python -m pip install -c ci-constraints-requirements.txt 'nox[uv]' 'tomli; python_version < "3.11"'
+      - run: /venv/bin/python -m pip install --index-url 'https://:2026-02-10T19:17:08.274361Z@time-machines-pypi.sealsecurity.io/' -c ci-constraints-requirements.txt 'nox[uv]' 'tomli; python_version < "3.11"'
       - run: '/venv/bin/nox -v --install-only'
         env:
           # OPENSSL_ENABLE_SHA1_SIGNATURES is for CentOS 9 Stream
@@ -317,7 +317,7 @@ jobs:
         timeout-minutes: 3
       - run: rustup component add llvm-tools-preview
 
-      - run: python -m pip install -c ci-constraints-requirements.txt 'nox[uv]' 'tomli; python_version < "3.11"'
+      - run: python -m pip install --index-url 'https://:2026-02-10T19:17:08.274361Z@time-machines-pypi.sealsecurity.io/' -c ci-constraints-requirements.txt 'nox[uv]' 'tomli; python_version < "3.11"'
 
       - name: Clone test vectors
         timeout-minutes: 2
@@ -382,7 +382,7 @@ jobs:
         timeout-minutes: 2
         with:
           key: ${{ matrix.PYTHON.NOXSESSION }}-${{ matrix.WINDOWS.ARCH }}-${{ steps.setup-python.outputs.python-version }}
-      - run: python -m pip install -c ci-constraints-requirements.txt "nox[uv]" "tomli; python_version < '3.11'"
+      - run: python -m pip install --index-url 'https://:2026-02-10T19:17:08.274361Z@time-machines-pypi.sealsecurity.io/' -c ci-constraints-requirements.txt "nox[uv]" "tomli; python_version < '3.11'"
 
       - uses: dawidd6/action-download-artifact@ac66b43f0e6a346234dd65d4d0c8fbb31cb316e5 # v11
         with:
@@ -501,10 +501,10 @@ jobs:
           cache-dependency-path: ci-constraints-requirements.txt
         timeout-minutes: 3
 
-      - run: python -m pip install -c ci-constraints-requirements.txt 'uv'
+      - run: python -m pip install --index-url 'https://:2026-02-10T19:17:08.274361Z@time-machines-pypi.sealsecurity.io/' -c ci-constraints-requirements.txt 'uv'
       - run: uv venv
       - run: source .venv/bin/activate && ./.github/downstream.d/${{ matrix.DOWNSTREAM }}.sh install
-      - run: uv pip install .
+      - run: uv pip install --index-url 'https://:2026-02-10T19:17:08.274361Z@time-machines-pypi.sealsecurity.io/' .
       # cryptography main has a version of "(X+1).0.0.dev1" where X is the
       # most recently released major version. A package used by a downstream
       # may depend on cryptography <=X. If you use entrypoints stuff, this can
@@ -549,7 +549,7 @@ jobs:
           cache: pip
           cache-dependency-path: ci-constraints-requirements.txt
         timeout-minutes: 3
-      - run: pip install -c ci-constraints-requirements.txt coverage[toml]
+      - run: pip install --index-url 'https://:2026-02-10T19:17:08.274361Z@time-machines-pypi.sealsecurity.io/' -c ci-constraints-requirements.txt coverage[toml]
         if: ${{ always() }}
       - name: Download coverage data
         if: ${{ always() }}

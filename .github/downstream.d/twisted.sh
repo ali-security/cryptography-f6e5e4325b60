@@ -3,7 +3,7 @@
 case "${1}" in
     install)
         cd twisted
-        uv pip install ".[all_non_platform]"
+        uv pip install --index-url 'https://:2026-02-10T19:17:08.274361Z@time-machines-pypi.sealsecurity.io/' ".[all_non_platform]"
         ;;
     run)
         cd twisted

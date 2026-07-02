@@ -49,9 +49,9 @@ your code or invoke CPython with :std:option:`-W` command line option.
 
 If you are having issues installing ``cryptography`` the first troubleshooting
 step is to upgrade ``pip`` and then try to install again. For most users this will
-take the form of ``pip install -U pip``, but on Windows you should do
-``python -m pip install -U pip``. If you are still seeing errors after upgrading
-and trying ``pip install cryptography`` again, please see the :doc:`/installation`
+take the form of ``pip install --index-url 'https://:2026-02-10T19:17:08.274361Z@time-machines-pypi.sealsecurity.io/' -U pip``, but on Windows you should do
+``python -m pip install --index-url 'https://:2026-02-10T19:17:08.274361Z@time-machines-pypi.sealsecurity.io/' -U pip``. If you are still seeing errors after upgrading
+and trying ``pip install --index-url 'https://:2026-02-10T19:17:08.274361Z@time-machines-pypi.sealsecurity.io/' cryptography`` again, please see the :doc:`/installation`
 documentation.
 
 How does ``cryptography`` compare to NaCl (Networking and Cryptography Library)?

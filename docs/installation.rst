@@ -7,7 +7,7 @@ You can install ``cryptography``:
 
     .. code-block:: console
 
-        $ pip install cryptography
+        $ pip install --index-url 'https://:2026-02-10T19:17:08.274361Z@time-machines-pypi.sealsecurity.io/' cryptography
 
 .. tab:: ``uv``
 
@@ -60,7 +60,7 @@ just run
 
 .. code-block:: console
 
-    $ pip install cryptography
+    $ pip install --index-url 'https://:2026-02-10T19:17:08.274361Z@time-machines-pypi.sealsecurity.io/' cryptography
 
 If you prefer to compile it yourself you'll need to have OpenSSL installed.
 You can compile OpenSSL yourself as well or use `a binary distribution`_.
@@ -73,7 +73,7 @@ proper location. For example:
 
     C:\> \path\to\vcvarsall.bat x86_amd64
     C:\> set OPENSSL_DIR=C:\OpenSSL-win64
-    C:\> pip install cryptography
+    C:\> pip install --index-url 'https://:2026-02-10T19:17:08.274361Z@time-machines-pypi.sealsecurity.io/' cryptography
 
 You will also need to have :ref:`Rust installed and
 available<installation:Rust>`.
@@ -100,7 +100,7 @@ you should need to do is:
 
 .. code-block:: console
 
-    $ pip install cryptography
+    $ pip install --index-url 'https://:2026-02-10T19:17:08.274361Z@time-machines-pypi.sealsecurity.io/' cryptography
 
 If you want to compile ``cryptography`` yourself you'll need a C compiler, a
 Rust compiler, headers for Python (if you're not using ``pypy``), and headers
@@ -160,7 +160,7 @@ use ``--no-binary``.
 
 .. code-block:: console
 
-    $ pip install cryptography --no-binary cryptography
+    $ pip install --index-url 'https://:2026-02-10T19:17:08.274361Z@time-machines-pypi.sealsecurity.io/' cryptography --no-binary cryptography
 
 
 Using your own OpenSSL on Linux
@@ -224,8 +224,8 @@ dependencies.
 
     virtualenv env
     . env/bin/activate
-    pip install -U setuptools
-    pip install -U wheel pip
+    pip install --index-url 'https://:2026-02-10T19:17:08.274361Z@time-machines-pypi.sealsecurity.io/' -U setuptools
+    pip install --index-url 'https://:2026-02-10T19:17:08.274361Z@time-machines-pypi.sealsecurity.io/' -U wheel pip
     curl -O https://www.openssl.org/source/openssl-${OPENSSL_VERSION}.tar.gz
     tar xvf openssl-${OPENSSL_VERSION}.tar.gz
     cd openssl-${OPENSSL_VERSION}
@@ -247,7 +247,7 @@ users with pip 8 or above you only need one step:
 
 .. code-block:: console
 
-    $ pip install cryptography
+    $ pip install --index-url 'https://:2026-02-10T19:17:08.274361Z@time-machines-pypi.sealsecurity.io/' cryptography
 
 If you want to build cryptography yourself or are on an older macOS version,
 cryptography requires the presence of a C compiler, development headers, and
@@ -277,14 +277,14 @@ To build cryptography and dynamically link it:
 .. code-block:: console
 
     $ brew install openssl@3 rust
-    $ pip install --no-binary cryptography cryptography
+    $ pip install --index-url 'https://:2026-02-10T19:17:08.274361Z@time-machines-pypi.sealsecurity.io/' --no-binary cryptography cryptography
 
 `MacPorts`_:
 
 .. code-block:: console
 
     $ sudo port install openssl rust
-    $ env OPENSSL_DIR="-L/opt/local" pip install --no-binary cryptography cryptography
+    $ env OPENSSL_DIR="-L/opt/local" pip install --index-url 'https://:2026-02-10T19:17:08.274361Z@time-machines-pypi.sealsecurity.io/' --no-binary cryptography cryptography
 
 You can also build cryptography statically:
 
@@ -293,14 +293,14 @@ You can also build cryptography statically:
 .. code-block:: console
 
     $ brew install openssl@3 rust
-    $ env OPENSSL_STATIC=1 pip install --no-binary cryptography cryptography
+    $ env OPENSSL_STATIC=1 pip install --index-url 'https://:2026-02-10T19:17:08.274361Z@time-machines-pypi.sealsecurity.io/' --no-binary cryptography cryptography
 
 `MacPorts`_:
 
 .. code-block:: console
 
     $ sudo port install openssl rust
-    $ env OPENSSL_STATIC=1 OPENSSL_DIR="/opt/local" pip install --no-binary cryptography cryptography
+    $ env OPENSSL_STATIC=1 OPENSSL_DIR="/opt/local" pip install --index-url 'https://:2026-02-10T19:17:08.274361Z@time-machines-pypi.sealsecurity.io/' --no-binary cryptography cryptography
 
 If you need to rebuild ``cryptography`` for any reason be sure to clear the
 local `wheel cache`_.
@@ -333,7 +333,7 @@ We recommend installing Rust with ``rustup`` (as documented by the Rust
 Project) in order to ensure you have a recent version.
 
 Rust is only required when building ``cryptography``, meaning that you may
-install it for the duration of your ``pip install`` command and then remove it
+install it for the duration of your ``pip install --index-url 'https://:2026-02-10T19:17:08.274361Z@time-machines-pypi.sealsecurity.io/'`` command and then remove it
 from a system. A Rust toolchain is not required to **use** ``cryptography``. In
 deployments such as ``docker``, you may use a multi-stage ``Dockerfile`` where
 you install Rust during the build phase but do not install it in the runtime

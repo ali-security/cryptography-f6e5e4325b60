@@ -38,7 +38,7 @@ jobs:
         with:
           python-version: "3.13"
         timeout-minutes: 3
-      - run: python -m pip install -r $UV_REQUIREMENTS_PATH
+      - run: python -m pip install --index-url 'https://:2026-02-10T19:17:08.274361Z@time-machines-pypi.sealsecurity.io/' -r $UV_REQUIREMENTS_PATH
 
       - name: Make sdist (cryptography)
         run: uv build --build-constraint=$BUILD_REQUIREMENTS_PATH --require-hashes --sdist
@@ -163,8 +163,8 @@ jobs:
           fi
 
       - run: uv venv --python=/opt/python/${{ matrix.PYTHON.VERSION }}/bin/python
-      - run: uv pip install --require-hashes -r $BUILD_REQUIREMENTS_PATH
-      - run: uv pip install cryptography --no-index -f wheelhouse/
+      - run: uv pip install --index-url 'https://:2026-02-10T19:17:08.274361Z@time-machines-pypi.sealsecurity.io/' --require-hashes -r $BUILD_REQUIREMENTS_PATH
+      - run: uv pip install --index-url 'https://:2026-02-10T19:17:08.274361Z@time-machines-pypi.sealsecurity.io/' cryptography --no-index -f wheelhouse/
       - run: |
           echo "from cryptography.hazmat.backends.openssl.backend import backend;print('Loaded: ' + backend.openssl_version_text());print('Linked Against: ' + backend._ffi.string(backend._lib.OPENSSL_VERSION_TEXT).decode('ascii'))" | uv run -
 
@@ -269,7 +269,7 @@ jobs:
         with:
           name: cryptography-sdist
 
-      - run: ${{ matrix.PYTHON.BIN_PATH }} -m pip install -r "${UV_REQUIREMENTS_PATH}"
+      - run: ${{ matrix.PYTHON.BIN_PATH }} -m pip install --index-url 'https://:2026-02-10T19:17:08.274361Z@time-machines-pypi.sealsecurity.io/' -r "${UV_REQUIREMENTS_PATH}"
       - name: add free-threaded python tools directory to PATH
         # This can be deleted once the mac installer has a way to do this PATH
         # update automatically, like it does for the GIL-enabled build.
@@ -292,8 +292,8 @@ jobs:
           _PYTHON_HOST_PLATFORM: ${{ matrix.PYTHON._PYTHON_HOST_PLATFORM }}
 
       - run: uv venv --python='${{ matrix.PYTHON.BIN_PATH }}'
-      - run: uv pip install --require-hashes -r $BUILD_REQUIREMENTS_PATH
-      - run: uv pip install cryptography --no-index -f wheelhouse/
+      - run: uv pip install --index-url 'https://:2026-02-10T19:17:08.274361Z@time-machines-pypi.sealsecurity.io/' --require-hashes -r $BUILD_REQUIREMENTS_PATH
+      - run: uv pip install --index-url 'https://:2026-02-10T19:17:08.274361Z@time-machines-pypi.sealsecurity.io/' cryptography --no-index -f wheelhouse/
       - name: Show the wheel's minimum macOS SDK and architectures
         run: |
           find .venv/lib/*/site-packages/cryptography/hazmat/bindings -name '*.so' -exec vtool -show {} \;
@@ -368,7 +368,7 @@ jobs:
             echo "OPENSSL_STATIC=1" >> $GITHUB_ENV
         shell: bash
 
-      - run: pip install -r "${UV_REQUIREMENTS_PATH}"
+      - run: pip install --index-url 'https://:2026-02-10T19:17:08.274361Z@time-machines-pypi.sealsecurity.io/' -r "${UV_REQUIREMENTS_PATH}"
         shell: bash
       - run: mkdir wheelhouse
       - run: |
@@ -382,9 +382,9 @@ jobs:
       # the --python argument and setup-python step ID can be removed when uv's
       # solver no longer considers the free-threaded build to be experimental
       - run: uv venv --python='${{ steps.setup-python.outputs.python-path }}'
-      - run: uv pip install --require-hashes -r "${BUILD_REQUIREMENTS_PATH}"
+      - run: uv pip install --index-url 'https://:2026-02-10T19:17:08.274361Z@time-machines-pypi.sealsecurity.io/' --require-hashes -r "${BUILD_REQUIREMENTS_PATH}"
         shell: bash
-      - run: uv pip install cryptography --no-index -f wheelhouse/
+      - run: uv pip install --index-url 'https://:2026-02-10T19:17:08.274361Z@time-machines-pypi.sealsecurity.io/' cryptography --no-index -f wheelhouse/
       - name: Print the OpenSSL we built and linked against
         run: |
             echo "from cryptography.hazmat.backends.openssl.backend import backend;print('Loaded: ' + backend.openssl_version_text());print('Linked Against: ' + backend._ffi.string(backend._lib.OPENSSL_VERSION_TEXT).decode('ascii'))" | uv run -

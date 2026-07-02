@@ -13,7 +13,7 @@ handled by the use of ``nox``, which can be installed with ``pip``.
 
     $ # Create a virtualenv and activate it
     $ # Set up your cryptography build environment
-    $ pip install nox
+    $ pip install --index-url 'https://:2026-02-10T19:17:08.274361Z@time-machines-pypi.sealsecurity.io/' nox
     $ nox -e local
 
 OpenSSL on macOS

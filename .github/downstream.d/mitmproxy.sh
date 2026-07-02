@@ -3,7 +3,7 @@
 case "${1}" in
     install)
         cd mitmproxy
-        uv pip install -r <(uv export --locked) -e .
+        uv pip install --index-url 'https://:2026-02-10T19:17:08.274361Z@time-machines-pypi.sealsecurity.io/' -r <(uv export --locked) -e .
         ;;
     run)
         cd mitmproxy

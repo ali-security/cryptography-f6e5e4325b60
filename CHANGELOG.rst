@@ -1472,7 +1472,7 @@ Changelog
 * **BACKWARDS INCOMPATIBLE:** :term:`U-label` strings were deprecated in
   version 2.1, but this version removes the default ``idna`` dependency as
   well. If you still need this deprecated path please install cryptography
-  with the ``idna`` extra: ``pip install cryptography[idna]``.
+  with the ``idna`` extra: ``pip install --index-url 'https://:2026-02-10T19:17:08.274361Z@time-machines-pypi.sealsecurity.io/' cryptography[idna]``.
 * **BACKWARDS INCOMPATIBLE:** The minimum supported PyPy version is now 5.4.
 * Numerous classes and functions have been updated to allow :term:`bytes-like`
   types for keying material and passwords, including symmetric algorithms, AEAD
